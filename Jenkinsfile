@@ -18,7 +18,7 @@ pipeline {
         stage('Unit Test'){
             steps {         
                 script{
-                    mvnTest();
+                    mvnTest()
                 }      
             }
         }
@@ -26,8 +26,7 @@ pipeline {
         stage('Unit Test'){
             steps {           
                 script{
-                    mvnIntegrationTest();                
-
+                    mvnIntegrationTest()
                 }    
             }
         }
