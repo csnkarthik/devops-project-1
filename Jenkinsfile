@@ -14,7 +14,8 @@ pipeline {
                     url: 'https://github.com/csnkarthik/devops-project-1.git'
                 )
             }
-        }        
+        }
+
         stage('Unit Test'){
             steps {         
                 script{
@@ -22,8 +23,8 @@ pipeline {
                 }      
             }
         }
-
-        stage('Unit Test'){
+        
+        stage('Integration Test'){
             steps {           
                 script{
                     mvnIntegrationTest()
