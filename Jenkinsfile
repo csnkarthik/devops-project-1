@@ -9,8 +9,9 @@ pipeline {
     }
     stages{
         
-        when { expression { param.action == 'create' } }
         stage('Git Checkout'){
+            
+            when { expression { param.action == 'create' } }
             steps {                
                 gitCheckout(
                     branch: 'main',
@@ -35,7 +36,6 @@ pipeline {
                 }    
             }
         }
-
         stage('Static Code Analysis'){
             when { expression { param.action == 'create' } }
             steps {         
