@@ -40,7 +40,8 @@ pipeline {
             when { expression { params.action == 'create' } }
             steps {         
                 script{
-                    staticCodeAnalysis();
+                    def sonarcubeCredentials = 'sonar-api'
+                    staticCodeAnalysis(sonarcubeCredentials);
                 }      
             }
         }
