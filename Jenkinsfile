@@ -8,9 +8,7 @@ pipeline {
         choice choices: ['create', 'delete'], description: 'Choose create or Delete', name: 'action'
     }
     stages{
-        
-        stage('Git Checkout'){
-            
+        stage('Git Checkout'){            
             when { expression { params.action == 'create' } }
             steps {                
                 gitCheckout(
@@ -19,7 +17,6 @@ pipeline {
                 )
             }
         }
-        
         stage('Unit Test'){
             when { expression { params.action == 'create' } }
             steps {         
@@ -45,7 +42,6 @@ pipeline {
                 }      
             }
         }
-
         stage('Quality Gate status check'){
             when { expression { params.action == 'create' } }
             steps {         
@@ -54,7 +50,15 @@ pipeline {
                     qualityGateStatus(sonarcubeCredentials);
                 }      
             }
-
+        }
+        
+        stage('Maven build'){
+            when { expression { params.action == 'create' } }            
+            steps {         
+                script{
+                    mvnBuild();
+                }      
+            }
         }
     }
 }
