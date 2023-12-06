@@ -5,7 +5,7 @@ pipeline {
         label 'docker'
     }
     parameters {
-        choice defaultValue: 'create', choices: ['create', 'delete'], description: 'Choose create or Delete', name: 'action'
+        choice choices: ['create', 'delete'], description: 'Choose create or Delete', name: 'action'
         string defaultValue: 'javaApp', description: 'Name of the Image', name: 'ImageName'
         string defaultValue: 'v1', description: 'Tag of the Image', name: 'ImageTag'
         string defaultValue: 'sprintboot', description: 'Name of the App', name: 'AppName'
