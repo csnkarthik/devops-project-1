@@ -68,7 +68,16 @@ pipeline {
             when { expression { params.action == 'create' } }            
             steps {         
                 script{
-                    dockerBuild("${params.ImageName}", "${params.ImageTag}", "${params.dockerHubUser}");
+                    dockerBuild("${params.ImageName}", "${params.ImageTag}", "${params.AppName}");
+                }
+            }
+        }
+
+        stage('Docker Image Scane'){
+            when { expression { params.action == 'create' } }            
+            steps {         
+                script{
+                    dockerImageScan("${params.ImageName}", "${params.AppName}");
                 }
             }
         }
