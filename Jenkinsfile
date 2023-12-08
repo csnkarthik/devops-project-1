@@ -6,7 +6,7 @@ pipeline {
     }
     parameters {
         choice choices: ['create', 'delete'], description: 'Choose create or Delete', name: 'action'
-        string defaultValue: 'javaApp', description: 'Name of the Image', name: 'ImageName'
+        string defaultValue: 'javaapp', description: 'Name of the Image', name: 'ImageName'
         string defaultValue: 'v1', description: 'Tag of the Image', name: 'ImageTag'
         string defaultValue: 'csnkarthik', description: 'Name of the App', name: 'dockerHubUser'
     }
