@@ -63,12 +63,12 @@ pipeline {
                 }      
             }
         }
-
+        
         stage('Docker Image build'){
             when { expression { params.action == 'create' } }            
             steps {         
                 script{
-                    dockerBuild("${params.ImageName}", "${params.ImageTag}", "${params.AppName}");
+                    dockerBuild("${params.ImageName}", "${params.ImageTag}", "${params.dockerHubUser}");
                 }
             }
         }
@@ -77,7 +77,7 @@ pipeline {
             when { expression { params.action == 'create' } }            
             steps {         
                 script{
-                    dockerImageScan("${params.ImageName}", "${params.AppName}");
+                    dockerImageScan("${params.ImageName}", "${params.dockerHubUser}");
                 }
             }
         }
