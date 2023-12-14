@@ -90,22 +90,5 @@ pipeline {
                 }
             }
         }
-
-        // stage('Deploy'){
-        //     when { expression { params.action == 'create' } }            
-        //     steps {         
-        //         script{
-                    
-        //             def apply = true;
-
-        //             try{
-
-        //             }
-        //             catch(err){
-        //                 apply = true;
-        //             }
-
-        //         }
-        //     }
-        // }
+       
 }
