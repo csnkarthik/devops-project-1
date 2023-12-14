@@ -91,21 +91,21 @@ pipeline {
             }
         }
 
-        stage('Deploy'){
-            when { expression { params.action == 'create' } }            
-            steps {         
-                script{
+        // stage('Deploy'){
+        //     when { expression { params.action == 'create' } }            
+        //     steps {         
+        //         script{
                     
-                    def apply = true;
+        //             def apply = true;
 
-                    try{
+        //             try{
 
-                    }
-                    catch(err){
-                        apply = true;
-                    }
+        //             }
+        //             catch(err){
+        //                 apply = true;
+        //             }
 
-                }
-            }
-        }
+        //         }
+        //     }
+        // }
 }
