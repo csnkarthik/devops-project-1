@@ -97,7 +97,7 @@ pipeline {
                 sshagent(['minikube_cluster']) {
                     sh """
                         ssh -o StrictHostKeyChecking=no gayathrik@192.168.0.104    
-                        scp ${WORKSPACE}/deploy/k8s-deployment gayathrik@192.168.0.104:~/Desktop/installs/devops-project-1/                        
+                        scp ${WORKSPACE}/deploy/k8s-deployment.yaml gayathrik@192.168.0.104:~/Desktop/installs/devops-project-1/                        
                     """
                 }
             }
