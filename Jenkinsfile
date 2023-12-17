@@ -13,7 +13,9 @@ pipeline {
     environment {
         DOCKER_CREDENTIALS = credentails('docker_credentials')
     }
+    
     stages{
+
         stage('Git Checkout'){            
             when { expression { params.action == 'create' } }
             steps {                
@@ -111,4 +113,5 @@ pipeline {
             }
         }
        
+    }
 }
