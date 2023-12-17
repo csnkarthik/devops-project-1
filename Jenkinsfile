@@ -11,9 +11,9 @@ pipeline {
         string defaultValue: 'csnkarthik', description: 'Name of the App', name: 'dockerHubUser'
     }
     environment {
-        DOCKER_CREDENTIALS = credentails('docker_credentials')
+        DOCKER_CREDENTIALS = credentials('docker_credentials')
     }
-    
+
     stages{
 
         stage('Git Checkout'){            
