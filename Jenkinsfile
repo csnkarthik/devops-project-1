@@ -94,7 +94,7 @@ pipeline {
         //     }
         // }
 
-        stage('connect to minikube'){
+        stage('deploy to minikube'){
             when { expression { params.action == 'create' } }            
             steps {         
                 sshagent(['minikube_cluster']) {
@@ -107,8 +107,8 @@ pipeline {
                         ssh -o StrictHostKeyChecking=no gayathrik@192.168.0.104  kubectl apply -f ~/Desktop/installs/devops-project-1/k8s-deployment.yaml    
                         ssh -o StrictHostKeyChecking=no gayathrik@192.168.0.104  kubectl expose deployment java-app-v4 --type=NodePort --port=8080                        
                     """
+                }
             }
         }
-    }
        
 }
