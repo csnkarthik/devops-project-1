@@ -95,7 +95,12 @@ pipeline {
             when { expression { params.action == 'create' } }            
             steps {         
                 sshagent(['minikube_cluster']) {
-                    sh 'ls'
+                    sh """
+                        ssh -o StrictHostKeyChecking=no gayathrik@192.168.0.104
+                        
+                        ls
+                        pwd
+                    """
                 }
             }
         }
