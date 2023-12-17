@@ -107,6 +107,7 @@ pipeline {
                         docker login -u ${DOCKER_CREDENTIALS_USR} -p ${DOCKER_CREDENTIALS_PSW}
 
                         ssh -o StrictHostKeyChecking=no gayathrik@192.168.0.104  kubectl apply -f ~/Desktop/installs/devops-project-1/k8s-deployment.yaml    
+                        ssh -o StrictHostKeyChecking=no gayathrik@192.168.0.104  kubectl expose deployment java-app-v4 --type=NodePort --port=8080 
                                                
                     """
                 }
