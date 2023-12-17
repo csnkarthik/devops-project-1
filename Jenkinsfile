@@ -100,15 +100,18 @@ pipeline {
                         ssh -o StrictHostKeyChecking=no gayathrik@192.168.0.104    
                         scp ${WORKSPACE}/deploy/k8s-deployment.yaml gayathrik@192.168.0.104:~/Desktop/installs/devops-project-1/                        
                     """
-                    withCredentials([usernamePassword(credentialsId: 'docker_credentials', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
-                        sh "docker login -u '$USER' -p '$PASS'"  
+                    script{
+                        withCredentials([usernamePassword(credentialsId: 'docker_credentials', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
+                            sh "docker login -u '$USER' -p '$PASS'"  
 
-                        sh """
-                            ssh -o StrictHostKeyChecking=no gayathrik@192.168.0.104  kubectl apply -f ~/Desktop/installs/devops-project-1/k8s-deployment.yaml    
-                            ssh -o StrictHostKeyChecking=no gayathrik@192.168.0.104  kubectl expose deployment java-app-v4 --type=NodePort --port=8080        
+                            sh """
+                                ssh -o StrictHostKeyChecking=no gayathrik@192.168.0.104  kubectl apply -f ~/Desktop/installs/devops-project-1/k8s-deployment.yaml    
+                                ssh -o StrictHostKeyChecking=no gayathrik@192.168.0.104  kubectl expose deployment java-app-v4 --type=NodePort --port=8080        
 
-                        """
+                            """
+                        }
                     }
+                    
             }
         }
     }
