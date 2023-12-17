@@ -10,6 +10,7 @@ pipeline {
         string defaultValue: 'v1', description: 'Tag of the Image', name: 'ImageTag'
         string defaultValue: 'csnkarthik', description: 'Name of the App', name: 'dockerHubUser'
     }
+    
     stages{
         stage('Git Checkout'){            
             when { expression { params.action == 'create' } }
@@ -99,13 +100,15 @@ pipeline {
                         ssh -o StrictHostKeyChecking=no gayathrik@192.168.0.104    
                         scp ${WORKSPACE}/deploy/k8s-deployment.yaml gayathrik@192.168.0.104:~/Desktop/installs/devops-project-1/                        
                     """
-                    
-                    sh """
-                        ssh -o StrictHostKeyChecking=no gayathrik@192.168.0.104  kubectl apply -f ~/Desktop/installs/devops-project-1/k8s-deployment.yaml    
-                        ssh -o StrictHostKeyChecking=no gayathrik@192.168.0.104  kubectl expose deployment java-app-v4 --type=NodePort --port=8080        
+                    withCredentials([usernamePassword(credentialsId: 'docker_credentials', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
+                        sh "docker login -u '$USER' -p '$PASS'"  
 
-                    """
-                }
+                        sh """
+                            ssh -o StrictHostKeyChecking=no gayathrik@192.168.0.104  kubectl apply -f ~/Desktop/installs/devops-project-1/k8s-deployment.yaml    
+                            ssh -o StrictHostKeyChecking=no gayathrik@192.168.0.104  kubectl expose deployment java-app-v4 --type=NodePort --port=8080        
+
+                        """
+                    }
             }
         }
     }
