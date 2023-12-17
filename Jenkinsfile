@@ -96,10 +96,9 @@ pipeline {
             steps {         
                 sshagent(['minikube_cluster']) {
                     sh """
-                        ssh -o StrictHostKeyChecking=no gayathrik@192.168.0.104
-                        
-                        ls
-                        pwd
+                        ssh -o StrictHostKeyChecking=no gayathrik@192.168.0.104                        
+                        ssh -o StrictHostKeyChecking=no gayathrik@192.168.0.104 ls
+                        ssh -o StrictHostKeyChecking=no gayathrik@192.168.0.104 pwd                        
                     """
                 }
             }
