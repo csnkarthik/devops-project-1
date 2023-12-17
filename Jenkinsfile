@@ -90,6 +90,24 @@ pipeline {
                 }
             }
         }
+
+        stage('Docker Image push'){
+            when { expression { params.action == 'create' } }            
+            steps {         
+                script{
+                    dockerImagePush("${params.ImageName}", "${params.ImageTag}", "${params.dockerHubUser}");
+                }
+            }
+        }
+
+        stage('connect to minikube'){
+            when { expression { params.action == 'create' } }            
+            steps {         
+                sshagent(['minikube_cluster']) {
+                    sh 'ls'
+                }
+            }
+        }
     }
        
 }
