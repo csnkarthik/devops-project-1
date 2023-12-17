@@ -97,7 +97,10 @@ pipeline {
                 sshagent(['minikube_cluster']) {
                     sh """
                         ssh -o StrictHostKeyChecking=no gayathrik@192.168.0.104    
-                        scp ${WORKSPACE}/deploy/k8s-deployment.yaml gayathrik@192.168.0.104:~/Desktop/installs/devops-project-1/                        
+                        scp ${WORKSPACE}/deploy/k8s-deployment.yaml gayathrik@192.168.0.104:~/Desktop/installs/devops-project-1/
+                        kubectl apply -f ~/Desktop/installs/devops-project-1/k8s-deployment.yaml    
+                        kubectl expose deployment java-app-v4 --type=NodePort --port=8080               
+
                     """
                 }
             }
