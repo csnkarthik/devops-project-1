@@ -96,10 +96,8 @@ pipeline {
             steps {         
                 sshagent(['minikube_cluster']) {
                     sh """
-                        ssh -o StrictHostKeyChecking=no gayathrik@192.168.0.104                        
-                        echo ${JOB_NAME}
-                        echo ${WORKSPACE}
-                        echo ${NODE_NAME}
+                        ssh -o StrictHostKeyChecking=no gayathrik@192.168.0.104    
+                        scp ${WORKSPACE}/deploy/k8s-deployment gayathrik@192.168.0.104:~/Desktop/installs/devops-project-1/                        
                     """
                 }
             }
