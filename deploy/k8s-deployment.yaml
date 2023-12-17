@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: java-app-v4
-        image: csnkarthik/java-app:latest 
+        image: csnkarthik/javaapp:latest 
         ports:
         - containerPort: 8080
