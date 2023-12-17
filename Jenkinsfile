@@ -97,7 +97,6 @@ pipeline {
                 sshagent(['minikube_cluster']) {
                     sh """
                         ssh -o StrictHostKeyChecking=no gayathrik@192.168.0.104                        
-                        echo ${BRANCH_NAME}
                         echo ${JOB_NAME}
                         echo ${WORKSPACE}
                         echo ${NODE_NAME}
