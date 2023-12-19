@@ -18,7 +18,7 @@ pipeline {
         stage('deploy to minikube'){
             when { expression { params.action == 'yes' } }            
             steps {         
-                input message: 'Are you sure you wanna proceed to destory?', ok: 'Yes' 
+                input message: 'Are you sure you wanna proceed to deploy?', ok: 'Yes' 
                 sshagent(['minikube_cluster']) {
                     sh """
                         ssh -o StrictHostKeyChecking=no gayathrik@192.168.0.104    
