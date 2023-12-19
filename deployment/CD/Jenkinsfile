@@ -1,0 +1,34 @@
+@Library('devops-projects-shared-lib') _
+
+pipeline {
+    
+    agent {
+        label 'docker'
+    }
+
+    parameters {
+        choice choices: ['no', 'yes'], description: 'Are you sure, you want to deploy?', name: 'action'       
+    }
+
+    environment {
+        DOCKER_CREDENTIALS = credentials('docker_credentials')
+    }
+
+    stages {
+        stage('deploy to minikube'){
+            when { expression { params.action == 'yes' } }            
+            steps {         
+                sshagent(['minikube_cluster']) {
+                    sh """
+                        ssh -o StrictHostKeyChecking=no gayathrik@192.168.0.104    
+                        scp ${WORKSPACE}/deploy/k8s-deployment.yaml gayathrik@192.168.0.104:~/Desktop/installs/devops-project-1/  
+
+                        docker login -u ${DOCKER_CREDENTIALS_USR} -p ${DOCKER_CREDENTIALS_PSW}
+                        ssh -o StrictHostKeyChecking=no gayathrik@192.168.0.104  kubectl apply -f ~/Desktop/installs/devops-project-1/k8s-deployment.yaml                       
+                                               
+                    """
+                }
+            }
+        }
+    }
+}
