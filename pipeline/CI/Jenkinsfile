@@ -96,23 +96,23 @@ pipeline {
         //     }
         // }
 
-        stage('deploy to minikube'){
-            when { expression { params.action == 'create' } }            
-            steps {         
-                sshagent(['minikube_cluster']) {
-                    sh """
-                        ssh -o StrictHostKeyChecking=no gayathrik@192.168.0.104    
-                        scp ${WORKSPACE}/deploy/k8s-deployment.yaml gayathrik@192.168.0.104:~/Desktop/installs/devops-project-1/  
+        // stage('deploy to minikube'){
+        //     when { expression { params.action == 'create' } }            
+        //     steps {         
+        //         sshagent(['minikube_cluster']) {
+        //             sh """
+        //                 ssh -o StrictHostKeyChecking=no gayathrik@192.168.0.104    
+        //                 scp ${WORKSPACE}/deploy/k8s-deployment.yaml gayathrik@192.168.0.104:~/Desktop/installs/devops-project-1/  
 
-                        docker login -u ${DOCKER_CREDENTIALS_USR} -p ${DOCKER_CREDENTIALS_PSW}
+        //                 docker login -u ${DOCKER_CREDENTIALS_USR} -p ${DOCKER_CREDENTIALS_PSW}
 
-                        ssh -o StrictHostKeyChecking=no gayathrik@192.168.0.104  kubectl apply -f ~/Desktop/installs/devops-project-1/k8s-deployment.yaml                            
+        //                 ssh -o StrictHostKeyChecking=no gayathrik@192.168.0.104  kubectl apply -f ~/Desktop/installs/devops-project-1/k8s-deployment.yaml                            
                                                
-                    """
-                }
-            }
-            //ssh -o StrictHostKeyChecking=no gayathrik@192.168.0.104  kubectl expose deployment java-app-v4 --type=NodePort --port=8080 
-        }
+        //             """
+        //         }
+        //     }
+        //     //ssh -o StrictHostKeyChecking=no gayathrik@192.168.0.104  kubectl expose deployment java-app-v4 --type=NodePort --port=8080 
+        // }
        
     }
 }
