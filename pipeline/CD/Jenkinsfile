@@ -25,8 +25,8 @@ pipeline {
                         scp -r ${WORKSPACE}/deploy gayathrik@192.168.0.104:~/Desktop/installs/devops-project-1
 
                         docker login -u ${DOCKER_CREDENTIALS_USR} -p ${DOCKER_CREDENTIALS_PSW}
-                        ssh -o StrictHostKeyChecking=no gayathrik@192.168.0.104  kubectl apply -f ~/Desktop/installs/devops-project-1/k8s-deployment.yaml    
-                        ssh -o StrictHostKeyChecking=no gayathrik@192.168.0.104  kubectl apply -f ~/Desktop/installs/devops-project-1/k8s-service.yaml
+                        ssh -o StrictHostKeyChecking=no gayathrik@192.168.0.104  kubectl apply -f ~/Desktop/installs/devops-project-1/deploy/k8s-deployment.yaml    
+                        ssh -o StrictHostKeyChecking=no gayathrik@192.168.0.104  kubectl apply -f ~/Desktop/installs/devops-project-1/deploy/k8s-service.yaml
                     """
                 }
             }
